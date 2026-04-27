@@ -3,18 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Arjun's Test Page</title>
+    <title>Arjun's World</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        body { font-family: sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; background: #f0f4f8; }
-        .card { background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); text-align: center; }
-        h1 { color: #2d3748; }
+        body { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; }
+        .glass { background: rgba(255, 255, 255, 0.2); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.3); }
     </style>
 </head>
-<body>
-    <div class="card">
-        <h1>🚀 Test Page Live</h1>
-        <p>This is a test for Arjun's new website.</p>
-        <a href="index.html">Back to Home</a>
+<body class="text-white font-sans">
+
+    <div class="container mx-auto px-4 py-10">
+        <div class="glass rounded-3xl p-8 max-w-2xl mx-auto text-center shadow-2xl">
+            <img src="arjun.jpg" alt="Arjun" class="w-48 h-48 rounded-full mx-auto border-4 border-white shadow-lg mb-6 object-cover bg-gray-200">
+            <h1 class="text-5xl font-bold mb-2">Hi, I'm Arjun! 🚀</h1>
+            <p class="text-xl opacity-90">Welcome to my space for building, learning, and math games.</p>
+        </div>
+
+        <div class="mt-12 max-w-4xl mx-auto">
+            <h2 class="text-3xl font-semibold mb-6 text-center">Select a Math Adventure</h2>
+            
+            <div class="glass rounded-2xl overflow-hidden">
+                <div class="flex border-b border-white/20">
+                    <button onclick="openTab('addition')" class="flex-1 py-4 font-bold hover:bg-white/10 transition">➕ Addition</button>
+                    <button onclick="openTab('shapes')" class="flex-1 py-4 font-bold hover:bg-white/10 transition border-x border-white/20">📐 Shapes</button>
+                    <button onclick="openTab('counting')" class="flex-1 py-4 font-bold hover:bg-white/10 transition">🔢 Counting</button>
+                </div>
+
+                <div class="p-10 text-center">
+                    <div id="addition" class="tab-content">
+                        <h3 class="text-2xl mb-4">Master the Plus Sign!</h3>
+                        <p class="mb-6">Ready to solve some rapid-fire addition problems?</p>
+                        <button class="bg-yellow-400 text-purple-900 px-8 py-3 rounded-full font-bold hover:scale-105 transition">Start Game</button>
+                    </div>
+                    
+                    <div id="shapes" class="tab-content hidden">
+                        <h3 class="text-2xl mb-4">Geometry Explorer</h3>
+                        <p class="mb-6">Can you identify all the hidden shapes in the rocket ship?</p>
+                        <button class="bg-green-400 text-green-900 px-8 py-3 rounded-full font-bold hover:scale-105 transition">Launch Game</button>
+                    </div>
+
+                    <div id="counting" class="tab-content hidden">
+                        <h3 class="text-2xl mb-4">Galaxy Counter</h3>
+                        <p class="mb-6">Count the stars and find the matching number!</p>
+                        <button class="bg-pink-400 text-pink-900 px-8 py-3 rounded-full font-bold hover:scale-105 transition">Play Now</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+
+    <script>
+        function openTab(tabId) {
+            // Hide all contents
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.add('hidden');
+            });
+            // Show the selected one
+            document.getElementById(tabId).classList.remove('hidden');
+        }
+    </script>
 </body>
 </html>
