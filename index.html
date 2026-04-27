@@ -1,86 +1,359 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Arjun Kapadia | Home</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        body { background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); min-height: 100vh; }
-        .glass { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.1); }
-        .about-card { transition: all 0.3s ease; border-left: 4px solid #3b82f6; }
-        .about-card:hover { transform: translateX(10px); background: rgba(59, 130, 246, 0.1); }
+      body {
+        background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+        min-height: 100vh;
+      }
+      .glass {
+        background: rgba(255, 255, 255, 0.03);
+        backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+      .about-card {
+        transition: all 0.3s ease;
+        border-left: 4px solid #3b82f6;
+      }
+      .about-card:hover {
+        transform: translateX(10px);
+        background: rgba(59, 130, 246, 0.1);
+      }
     </style>
-</head>
-<body class="text-slate-200 font-sans">
-
+  </head>
+  <body class="text-slate-200 font-sans">
     <nav class="glass sticky top-0 z-50 px-6 py-4 mb-8">
-        <div class="container mx-auto flex justify-between items-center">
-            <span class="text-2xl font-bold tracking-tighter text-blue-400">AK</span>
-            <div class="space-x-6 font-medium">
-                <button onclick="showSection('about')" class="hover:text-blue-400 transition">About Me</button>
-                <button onclick="showSection('math')" class="hover:text-blue-400 transition">Math Games</button>
-            </div>
+      <div class="container mx-auto flex justify-between items-center">
+        <span class="text-2xl font-bold tracking-tighter text-blue-400"
+          >AK</span
+        >
+        <div class="space-x-6 font-medium">
+          <button
+            onclick="showSection('about')"
+            class="hover:text-blue-400 transition"
+          >
+            About Me
+          </button>
+          <button
+            onclick="showSection('math')"
+            class="hover:text-blue-400 transition"
+          >
+            Math Games
+          </button>
         </div>
+      </div>
     </nav>
 
     <div class="container mx-auto px-4 pb-20">
-        
-        <div id="about-section" class="content-section max-w-4xl mx-auto">
-            <div class="text-center mb-12">
-                <div class="relative inline-block">
-                    <img src="arjun.png" alt="Arjun Kapadia" class="w-48 h-48 rounded-full border-4 border-blue-500 shadow-2xl object-cover mb-4">
-                    <div class="absolute bottom-4 right-2 bg-blue-500 p-2 rounded-full shadow-lg">👓</div>
-                </div>
-                <h1 class="text-5xl font-black text-white mb-2">Arjun Kapadia</h1>
-                <p class="text-blue-400 font-semibold uppercase tracking-widest text-sm">Explorer • Builder • Athlete</p>
+      <div id="about-section" class="content-section max-w-4xl mx-auto">
+        <div class="text-center mb-12">
+          <div class="relative inline-block">
+            <img
+              src="arjun.png"
+              alt="Arjun Kapadia"
+              class="w-48 h-48 rounded-full border-4 border-blue-500 shadow-2xl object-cover mb-4"
+            />
+            <div
+              class="absolute bottom-4 right-2 bg-blue-500 p-2 rounded-full shadow-lg"
+            >
+              👓
             </div>
-
-            <div class="grid gap-4">
-                <div class="glass about-card p-4 rounded-r-xl"><p class="text-lg">👋 My name is Arjun Kapadia and I am 5 years old.</p></div>
-                <div class="glass about-card p-4 rounded-r-xl"><p class="text-lg">❤️ I love my dad and mom.</p></div>
-                <div class="glass about-card p-4 rounded-r-xl"><p class="text-lg">📍 I live in Redwood City, California.</p></div>
-                <div class="glass about-card p-4 rounded-r-xl"><p class="text-lg">🚲 I love biking a lot.</p></div>
-                <div class="glass about-card p-4 rounded-r-xl"><p class="text-lg">🎾 I love to play tennis.</p></div>
-                <div class="glass about-card p-4 rounded-r-xl"><p class="text-lg">🏫 My school's name is Stratford.</p></div>
-                <div class="glass about-card p-4 rounded-r-xl"><p class="text-lg">🤝 I love my school friends.</p></div>
-                <div class="glass about-card p-4 rounded-r-xl"><p class="text-lg">👦 My brother's name is Aryan Kapadia.</p></div>
-                <div class="glass about-card p-4 rounded-r-xl"><p class="text-lg">👴 I love to see my grandparents.</p></div>
-                <div class="glass about-card p-4 rounded-r-xl"><p class="text-lg">👓 I have blue glasses.</p></div>
-            </div>
+          </div>
+          <h1 class="text-5xl font-black text-white mb-2">Arjun Kapadia</h1>
+          <p
+            class="text-blue-400 font-semibold uppercase tracking-widest text-sm"
+          >
+            Explorer • Builder • Athlete
+          </p>
         </div>
 
-        <div id="math-section" class="content-section hidden max-w-4xl mx-auto text-center">
-            <h2 class="text-4xl font-bold mb-10 text-white">Select a Math Game</h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="glass p-8 rounded-3xl border-t-4 border-yellow-400">
-                    <div class="text-5xl mb-4">➕</div>
-                    <h3 class="text-2xl font-bold mb-4">Addition</h3>
-                    <button class="bg-yellow-500 text-black px-6 py-2 rounded-full font-bold">Play Now</button>
-                </div>
-                <div class="glass p-8 rounded-3xl border-t-4 border-green-400">
-                    <div class="text-5xl mb-4">📐</div>
-                    <h3 class="text-2xl font-bold mb-4">Shapes</h3>
-                    <button class="bg-green-500 text-black px-6 py-2 rounded-full font-bold">Launch</button>
-                </div>
-                <div class="glass p-8 rounded-3xl border-t-4 border-pink-400">
-                    <div class="text-5xl mb-4">🔢</div>
-                    <h3 class="text-2xl font-bold mb-4">Counting</h3>
-                    <button class="bg-pink-500 text-black px-6 py-2 rounded-full font-bold">Start</button>
-                </div>
+        <div class="grid gap-4">
+          <div class="glass about-card p-4 rounded-r-xl">
+            <p class="text-lg">
+              👋 My name is Arjun Kapadia and I am 5 years old.
+            </p>
+          </div>
+          <div class="glass about-card p-4 rounded-r-xl">
+            <p class="text-lg">❤️ I love my dad and mom.</p>
+          </div>
+          <div class="glass about-card p-4 rounded-r-xl">
+            <p class="text-lg">📍 I live in Redwood City, California.</p>
+          </div>
+          <div class="glass about-card p-4 rounded-r-xl">
+            <p class="text-lg">🚲 I love biking a lot.</p>
+          </div>
+          <div class="glass about-card p-4 rounded-r-xl">
+            <p class="text-lg">🎾 I love to play tennis.</p>
+          </div>
+          <div class="glass about-card p-4 rounded-r-xl">
+            <p class="text-lg">🏫 My school's name is Stratford.</p>
+          </div>
+          <div class="glass about-card p-4 rounded-r-xl">
+            <p class="text-lg">🤝 I love my school friends.</p>
+          </div>
+          <div class="glass about-card p-4 rounded-r-xl">
+            <p class="text-lg">👦 My brother's name is Aryan Kapadia.</p>
+          </div>
+          <div class="glass about-card p-4 rounded-r-xl">
+            <p class="text-lg">👴 I love to see my grandparents.</p>
+          </div>
+          <div class="glass about-card p-4 rounded-r-xl">
+            <p class="text-lg">👓 I have blue glasses.</p>
+          </div>
+        </div>
+      </div>
+
+      <div id="math-section" class="content-section hidden max-w-4xl mx-auto">
+        <div id="math-menu" class="text-center">
+          <h2 class="text-4xl font-bold mb-10 text-white">
+            Select a Math Game
+          </h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div class="glass p-8 rounded-3xl border-t-4 border-yellow-400">
+              <div class="text-5xl mb-4">➕</div>
+              <h3 class="text-2xl font-bold mb-4">Addition</h3>
+              <button
+                onclick="startMathGame('addition')"
+                class="bg-yellow-500 text-black px-6 py-2 rounded-full font-bold hover:bg-yellow-400"
+              >
+                Play Now
+              </button>
             </div>
+            <div class="glass p-8 rounded-3xl border-t-4 border-red-400">
+              <div class="text-5xl mb-4">➖</div>
+              <h3 class="text-2xl font-bold mb-4">Subtraction</h3>
+              <button
+                onclick="startMathGame('subtraction')"
+                class="bg-red-500 text-black px-6 py-2 rounded-full font-bold hover:bg-red-400"
+              >
+                Play Now
+              </button>
+            </div>
+          </div>
         </div>
 
+        <div id="math-game" class="hidden">
+          <div class="flex justify-between items-center mb-8">
+            <button
+              onclick="backToMathMenu()"
+              class="text-blue-400 hover:text-blue-300 font-bold text-lg"
+            >
+              ← Back
+            </button>
+            <div class="glass px-6 py-2 rounded-full">
+              <span class="text-yellow-400 font-bold"
+                >Score: <span id="score">0</span></span
+              >
+            </div>
+            <div id="streak" class="glass px-6 py-2 rounded-full hidden">
+              <span class="text-green-400 font-bold"
+                >🔥 <span id="streak-count">0</span></span
+              >
+            </div>
+          </div>
+
+          <div
+            class="bg-gradient-to-br from-blue-500/20 to-purple-500/20 p-12 rounded-3xl text-center mb-8"
+          >
+            <p class="text-slate-300 mb-4 text-lg">
+              Problem <span id="problem-number">1</span> of 10
+            </p>
+            <div class="text-6xl font-bold text-white mb-8" id="problem">
+              5 + 3
+            </div>
+
+            <div id="feedback" class="mb-6 text-2xl font-bold hidden"></div>
+
+            <div
+              class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8"
+              id="answers-container"
+            >
+              <!-- Answers will be generated here -->
+            </div>
+
+            <div id="game-complete" class="hidden text-center">
+              <div class="text-5xl mb-4">🎉</div>
+              <h3 class="text-3xl font-bold text-white mb-4">Great Job!</h3>
+              <p class="text-2xl text-yellow-400 mb-8">
+                Final Score: <span id="final-score">0</span>/10
+              </p>
+              <button
+                onclick="backToMathMenu()"
+                class="bg-blue-500 text-white px-8 py-3 rounded-full font-bold hover:bg-blue-400"
+              >
+                Play Again
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
     <script>
-        function showSection(sectionId) {
-            document.querySelectorAll('.content-section').forEach(section => {
-                section.classList.add('hidden');
-            });
-            document.getElementById(sectionId + '-section').classList.remove('hidden');
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+      let currentGame = null;
+      let currentProblem = null;
+      let score = 0;
+      let streak = 0;
+      let problemCount = 0;
+      let answered = false;
+      let answeredCorrectly = false;
+
+      function showSection(sectionId) {
+        document.querySelectorAll(".content-section").forEach((section) => {
+          section.classList.add("hidden");
+        });
+        document
+          .getElementById(sectionId + "-section")
+          .classList.remove("hidden");
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+
+      function startMathGame(gameType) {
+        currentGame = gameType;
+        score = 0;
+        streak = 0;
+        problemCount = 0;
+        answered = false;
+        answeredCorrectly = false;
+
+        document.getElementById("math-menu").classList.add("hidden");
+        document.getElementById("math-game").classList.remove("hidden");
+        document.getElementById("game-complete").classList.add("hidden");
+        document.getElementById("score").textContent = "0";
+        document.getElementById("streak-count").textContent = "0";
+        document.getElementById("streak").classList.add("hidden");
+
+        generateNextProblem();
+      }
+
+      function generateNextProblem() {
+        answered = false;
+        answeredCorrectly = false;
+        problemCount++;
+
+        if (problemCount > 10) {
+          showGameComplete();
+          return;
         }
+
+        document.getElementById("problem-number").textContent = problemCount;
+        document.getElementById("feedback").classList.add("hidden");
+
+        if (currentGame === "addition") {
+          const num1 = Math.floor(Math.random() * 10) + 1; // 1-10
+          const num2 = Math.floor(Math.random() * 10) + 1; // 1-10
+          const answer = num1 + num2;
+          currentProblem = { num1, num2, answer, type: "addition" };
+          document.getElementById("problem").textContent = `${num1} + ${num2}`;
+        } else {
+          const num1 = Math.floor(Math.random() * 11) + 5; // 5-15
+          const num2 = Math.floor(Math.random() * num1); // 0 to num1
+          const answer = num1 - num2;
+          currentProblem = { num1, num2, answer, type: "subtraction" };
+          document.getElementById("problem").textContent = `${num1} - ${num2}`;
+        }
+
+        generateAnswerButtons();
+      }
+
+      function generateAnswerButtons() {
+        const container = document.getElementById("answers-container");
+        container.innerHTML = "";
+
+        const correctAnswer = currentProblem.answer;
+        const answers = new Set([correctAnswer]);
+
+        // Generate 3 more wrong answers
+        while (answers.size < 4) {
+          const wrongAnswer = Math.floor(Math.random() * 20);
+          if (wrongAnswer !== correctAnswer) {
+            answers.add(wrongAnswer);
+          }
+        }
+
+        // Shuffle answers
+        const answersArray = Array.from(answers).sort(
+          () => Math.random() - 0.5,
+        );
+
+        answersArray.forEach((ans) => {
+          const button = document.createElement("button");
+          button.textContent = ans;
+          button.onclick = () => checkAnswer(ans);
+          button.className =
+            "answer-btn glass p-6 rounded-2xl text-2xl font-bold text-white hover:bg-blue-500/20 transition disabled:opacity-50";
+          button.id = `answer-${ans}`;
+          container.appendChild(button);
+        });
+      }
+
+      function checkAnswer(selectedAnswer) {
+        if (answered) return;
+
+        answered = true;
+        const isCorrect = selectedAnswer === currentProblem.answer;
+        answeredCorrectly = isCorrect;
+
+        const feedback = document.getElementById("feedback");
+        const allAnswerButtons = document.querySelectorAll(".answer-btn");
+        allAnswerButtons.forEach((btn) => (btn.disabled = true));
+
+        if (isCorrect) {
+          score++;
+          streak++;
+          document.getElementById("score").textContent = score;
+          if (streak > 0) {
+            document.getElementById("streak").classList.remove("hidden");
+            document.getElementById("streak-count").textContent = streak;
+          }
+
+          feedback.innerHTML = "✅ Correct!";
+          feedback.style.color = "#4ade80";
+          feedback.classList.remove("hidden");
+          document.getElementById(`answer-${selectedAnswer}`).style.background =
+            "rgba(74, 222, 128, 0.3)";
+        } else {
+          streak = 0;
+          document.getElementById("streak-count").textContent = "0";
+
+          feedback.innerHTML = `❌ Oops! The answer is ${currentProblem.answer}`;
+          feedback.style.color = "#f87171";
+          feedback.classList.remove("hidden");
+          document.getElementById(`answer-${selectedAnswer}`).style.background =
+            "rgba(248, 113, 113, 0.3)";
+          document.getElementById(
+            `answer-${currentProblem.answer}`,
+          ).style.background = "rgba(74, 222, 128, 0.3)";
+        }
+
+        setTimeout(() => {
+          generateNextProblem();
+        }, 2000);
+      }
+
+      function showGameComplete() {
+        document.getElementById("answers-container").innerHTML = "";
+        document.getElementById(
+          "answers-container",
+        ).parentElement.style.display = "none";
+        document.getElementById("game-complete").classList.remove("hidden");
+        document.getElementById("final-score").textContent = score;
+      }
+
+      function backToMathMenu() {
+        document.getElementById("math-game").classList.add("hidden");
+        document.getElementById("math-menu").classList.remove("hidden");
+        document.getElementById(
+          "answers-container",
+        ).parentElement.style.display = "block";
+        currentGame = null;
+        currentProblem = null;
+        answered = false;
+      }
     </script>
-</body>
+  </body>
 </html>
