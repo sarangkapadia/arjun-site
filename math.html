@@ -1,109 +1,185 @@
-<div id="math-section" class="content-section max-w-4xl mx-auto">
-  <div id="math-menu" class="text-center">
-    <h2 class="text-4xl font-bold mb-10 text-white">Select a Math Game</h2>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-      <div class="glass p-8 rounded-3xl border-t-4 border-yellow-400">
-        <div class="text-5xl mb-4">➕</div>
-        <h3 class="text-2xl font-bold mb-4">Addition</h3>
+<div id="math-section" class="content-section max-w-6xl mx-auto px-4">
+  <!-- Menu Screen -->
+  <div id="math-menu" class="text-center py-8 md:py-12">
+    <h2 class="text-5xl md:text-6xl font-black mb-6 md:mb-12 text-white">
+      🎮 Let's Play Math!
+    </h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+      <!-- Addition Card -->
+      <div
+        class="glass p-8 md:p-12 rounded-3xl md:rounded-4xl border-t-4 border-yellow-400 transform hover:scale-105 transition-transform cursor-pointer"
+        onclick="startMathGame('addition')"
+      >
+        <div class="text-8xl md:text-9xl mb-6">➕</div>
+        <h3 class="text-4xl md:text-5xl font-black mb-6 text-yellow-300">
+          Addition
+        </h3>
+        <p class="text-2xl md:text-3xl text-slate-200 mb-6">
+          Add numbers together!
+        </p>
         <button
-          onclick="startMathGame('addition')"
-          class="bg-yellow-500 text-black px-6 py-2 rounded-full font-bold hover:bg-yellow-400"
+          class="bg-gradient-to-r from-yellow-400 to-yellow-500 text-black px-8 md:px-12 py-4 md:py-6 rounded-full font-black text-2xl md:text-3xl hover:shadow-lg hover:shadow-yellow-500 transition-all active:scale-95"
         >
-          Play Now
+          Let's Go! 🚀
         </button>
       </div>
-      <div class="glass p-8 rounded-3xl border-t-4 border-red-400">
-        <div class="text-5xl mb-4">➖</div>
-        <h3 class="text-2xl font-bold mb-4">Subtraction</h3>
+
+      <!-- Subtraction Card -->
+      <div
+        class="glass p-8 md:p-12 rounded-3xl md:rounded-4xl border-t-4 border-red-400 transform hover:scale-105 transition-transform cursor-pointer"
+        onclick="startMathGame('subtraction')"
+      >
+        <div class="text-8xl md:text-9xl mb-6">➖</div>
+        <h3 class="text-4xl md:text-5xl font-black mb-6 text-red-300">
+          Subtraction
+        </h3>
+        <p class="text-2xl md:text-3xl text-slate-200 mb-6">
+          Take numbers away!
+        </p>
         <button
-          onclick="startMathGame('subtraction')"
-          class="bg-red-500 text-black px-6 py-2 rounded-full font-bold hover:bg-red-400"
+          class="bg-gradient-to-r from-red-400 to-red-500 text-black px-8 md:px-12 py-4 md:py-6 rounded-full font-black text-2xl md:text-3xl hover:shadow-lg hover:shadow-red-500 transition-all active:scale-95"
         >
-          Play Now
+          Let's Go! 🚀
         </button>
       </div>
     </div>
   </div>
 
-  <div id="math-game" class="hidden">
-    <div class="flex justify-between items-center mb-8">
+  <!-- Game Screen -->
+  <div id="math-game" class="hidden py-6 md:py-12">
+    <!-- Score Bar -->
+    <div
+      class="flex justify-between items-center mb-8 md:mb-12 flex-wrap gap-4"
+    >
       <button
         onclick="backToMathMenu()"
-        class="text-blue-400 hover:text-blue-300 font-bold text-lg"
+        class="bg-blue-500 text-white px-6 md:px-8 py-3 md:py-4 rounded-full font-black text-xl md:text-2xl hover:bg-blue-600 transition-all active:scale-95"
       >
         ← Back
       </button>
-      <div class="glass px-6 py-2 rounded-full">
-        <span class="text-yellow-400 font-bold"
-          >Score: <span id="score">0</span></span
+      <div class="glass px-6 md:px-8 py-3 md:py-4 rounded-full">
+        <span class="text-yellow-300 font-black text-2xl md:text-3xl"
+          >⭐ Score: <span id="score">0</span>/10</span
         >
       </div>
-      <div id="streak" class="glass px-6 py-2 rounded-full hidden">
-        <span class="text-green-400 font-bold"
+      <div
+        id="streak"
+        class="glass px-6 md:px-8 py-3 md:py-4 rounded-full hidden"
+      >
+        <span class="text-green-300 font-black text-2xl md:text-3xl"
           >🔥 <span id="streak-count">0</span></span
         >
       </div>
     </div>
 
+    <!-- Problem Card -->
     <div
-      class="bg-gradient-to-br from-blue-500/20 to-purple-500/20 p-12 rounded-3xl text-center mb-8"
+      class="bg-gradient-to-br from-purple-500 via-blue-500 to-pink-500 p-8 md:p-16 rounded-3xl md:rounded-4xl text-center mb-8 md:mb-12 shadow-2xl"
     >
-      <p class="text-slate-300 mb-4 text-lg">
+      <!-- Progress -->
+      <p class="text-slate-100 mb-4 md:mb-6 text-xl md:text-2xl font-bold">
         Problem <span id="problem-number">1</span> of 10
       </p>
-      <div class="text-6xl font-bold text-white mb-8" id="problem">5 + 3</div>
 
-      <div id="feedback" class="mb-6 text-2xl font-bold hidden"></div>
+      <!-- Problem Display -->
+      <div
+        class="text-8xl md:text-9xl font-black text-white mb-8 md:mb-12 drop-shadow-lg"
+        id="problem"
+      >
+        5 + 3
+      </div>
 
-      <div class="mb-8 flex justify-center items-end gap-4">
-        <div>
-          <label class="text-slate-300 block mb-2 text-lg">Your Answer:</label>
+      <!-- Feedback Message -->
+      <div
+        id="feedback"
+        class="mb-8 md:mb-12 text-4xl md:text-5xl font-black hidden animate-bounce"
+      ></div>
+
+      <!-- Input Section -->
+      <div
+        class="mb-8 md:mb-12 flex flex-col md:flex-row justify-center items-center gap-6 md:gap-8"
+      >
+        <div class="w-full md:w-auto">
+          <label
+            class="text-white block mb-3 md:mb-4 text-2xl md:text-3xl font-black"
+            >Your Answer:</label
+          >
           <input
             type="number"
             id="answer-input"
-            class="glass text-4xl font-bold text-white text-center px-6 py-3 rounded-2xl w-32 focus:outline-none focus:ring-2 focus:ring-blue-400"
+            class="w-full md:w-48 text-6xl md:text-7xl font-black text-center px-6 md:px-8 py-4 md:py-6 rounded-3xl bg-white text-blue-600 focus:outline-none focus:ring-4 focus:ring-yellow-300 shadow-lg"
             placeholder="?"
             onkeypress="if (event.key === 'Enter') submitAnswer();"
           />
         </div>
         <button
           onclick="submitAnswer()"
-          class="bg-blue-500 text-white px-8 py-3 rounded-full font-bold hover:bg-blue-400 transition"
+          class="w-full md:w-auto bg-gradient-to-r from-green-400 to-green-500 text-black px-8 md:px-12 py-6 md:py-8 rounded-full font-black text-3xl md:text-4xl hover:shadow-lg hover:shadow-green-500 transition-all active:scale-95 mt-4 md:mt-0"
         >
-          Check
+          ✓ Check!
         </button>
       </div>
 
+      <!-- Game Complete Screen -->
       <div id="game-complete" class="hidden text-center">
+        <!-- Perfect Score Reward -->
         <div id="perfect-reward" class="hidden">
-          <div id="reward-emoji" class="text-7xl mb-6 animate-bounce">🎁</div>
-          <h3 class="text-4xl font-bold text-white mb-4">Perfect Score!</h3>
-          <p class="text-3xl text-yellow-400 mb-4">You got 10 out of 10!</p>
-          <div class="glass p-8 rounded-3xl mb-8 border-2 border-yellow-400">
-            <p class="text-2xl text-white mb-4">Here's your special gift:</p>
-            <div id="reward-display" class="text-6xl mb-4">🏆</div>
-            <p id="reward-message" class="text-xl text-yellow-300">
+          <div
+            id="reward-emoji"
+            class="text-9xl md:text-10xl mb-6 md:mb-8 animate-bounce"
+          >
+            🎁
+          </div>
+          <h3 class="text-5xl md:text-7xl font-black text-white mb-4 md:mb-6">
+            Perfect Score!
+          </h3>
+          <p
+            class="text-4xl md:text-6xl text-yellow-200 mb-8 md:mb-12 font-black"
+          >
+            10 out of 10! 🎉
+          </p>
+          <div
+            class="glass p-8 md:p-12 rounded-3xl mb-8 md:mb-12 border-4 border-yellow-300"
+          >
+            <p class="text-3xl md:text-4xl text-white mb-4 md:mb-6 font-black">
+              Your Special Gift:
+            </p>
+            <div id="reward-display" class="text-9xl md:text-10xl mb-4 md:mb-6">
+              🏆
+            </div>
+            <p
+              id="reward-message"
+              class="text-2xl md:text-3xl text-yellow-200 font-black"
+            >
               You're a Math Champion!
             </p>
           </div>
           <button
             onclick="backToMathMenu()"
-            class="bg-blue-500 text-white px-8 py-3 rounded-full font-bold hover:bg-blue-400"
+            class="w-full md:w-auto bg-gradient-to-r from-purple-500 to-pink-500 text-white px-8 md:px-12 py-6 md:py-8 rounded-full font-black text-3xl md:text-4xl hover:shadow-lg transition-all active:scale-95"
           >
-            Play Again
+            Play Again 🎮
           </button>
         </div>
+
+        <!-- Normal Completion -->
         <div id="normal-complete">
-          <div class="text-5xl mb-4">🎉</div>
-          <h3 class="text-3xl font-bold text-white mb-4">Great Job!</h3>
-          <p class="text-2xl text-yellow-400 mb-8">
-            Final Score: <span id="final-score">0</span>/10
+          <div class="text-9xl md:text-10xl mb-6 md:mb-8 animate-bounce">
+            🎉
+          </div>
+          <h3 class="text-5xl md:text-7xl font-black text-white mb-4 md:mb-6">
+            Great Job!
+          </h3>
+          <p
+            class="text-4xl md:text-6xl text-yellow-200 mb-8 md:mb-12 font-black"
+          >
+            Your Score: <span id="final-score">0</span>/10
           </p>
           <button
             onclick="backToMathMenu()"
-            class="bg-blue-500 text-white px-8 py-3 rounded-full font-bold hover:bg-blue-400"
+            class="w-full md:w-auto bg-gradient-to-r from-blue-500 to-cyan-500 text-white px-8 md:px-12 py-6 md:py-8 rounded-full font-black text-3xl md:text-4xl hover:shadow-lg transition-all active:scale-95"
           >
-            Play Again
+            Play Again 🎮
           </button>
         </div>
       </div>
