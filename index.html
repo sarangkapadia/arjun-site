@@ -48,149 +48,8 @@
       </div>
     </nav>
 
-    <div class="container mx-auto px-4 pb-20">
-      <div id="about-section" class="content-section max-w-4xl mx-auto">
-        <div class="text-center mb-12">
-          <div class="relative inline-block">
-            <img
-              src="arjun.png"
-              alt="Arjun Kapadia"
-              class="w-48 h-48 rounded-full border-4 border-blue-500 shadow-2xl object-cover mb-4"
-            />
-            <div
-              class="absolute bottom-4 right-2 bg-blue-500 p-2 rounded-full shadow-lg"
-            >
-              👓
-            </div>
-          </div>
-          <h1 class="text-5xl font-black text-white mb-2">Arjun Kapadia</h1>
-          <p
-            class="text-blue-400 font-semibold uppercase tracking-widest text-sm"
-          >
-            Explorer • Builder • Athlete
-          </p>
-        </div>
-
-        <div class="grid gap-4">
-          <div class="glass about-card p-4 rounded-r-xl">
-            <p class="text-lg">
-              👋 My name is Arjun Kapadia and I am 5 years old.
-            </p>
-          </div>
-          <div class="glass about-card p-4 rounded-r-xl">
-            <p class="text-lg">❤️ I love my dad and mom.</p>
-          </div>
-          <div class="glass about-card p-4 rounded-r-xl">
-            <p class="text-lg">📍 I live in Redwood City, California.</p>
-          </div>
-          <div class="glass about-card p-4 rounded-r-xl">
-            <p class="text-lg">🚲 I love biking a lot.</p>
-          </div>
-          <div class="glass about-card p-4 rounded-r-xl">
-            <p class="text-lg">🎾 I love to play tennis.</p>
-          </div>
-          <div class="glass about-card p-4 rounded-r-xl">
-            <p class="text-lg">🏫 My school's name is Stratford.</p>
-          </div>
-          <div class="glass about-card p-4 rounded-r-xl">
-            <p class="text-lg">🤝 I love my school friends.</p>
-          </div>
-          <div class="glass about-card p-4 rounded-r-xl">
-            <p class="text-lg">👦 My brother's name is Aryan Kapadia.</p>
-          </div>
-          <div class="glass about-card p-4 rounded-r-xl">
-            <p class="text-lg">👴 I love to see my grandparents.</p>
-          </div>
-          <div class="glass about-card p-4 rounded-r-xl">
-            <p class="text-lg">👓 I have blue glasses.</p>
-          </div>
-        </div>
-      </div>
-
-      <div id="math-section" class="content-section hidden max-w-4xl mx-auto">
-        <div id="math-menu" class="text-center">
-          <h2 class="text-4xl font-bold mb-10 text-white">
-            Select a Math Game
-          </h2>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div class="glass p-8 rounded-3xl border-t-4 border-yellow-400">
-              <div class="text-5xl mb-4">➕</div>
-              <h3 class="text-2xl font-bold mb-4">Addition</h3>
-              <button
-                onclick="startMathGame('addition')"
-                class="bg-yellow-500 text-black px-6 py-2 rounded-full font-bold hover:bg-yellow-400"
-              >
-                Play Now
-              </button>
-            </div>
-            <div class="glass p-8 rounded-3xl border-t-4 border-red-400">
-              <div class="text-5xl mb-4">➖</div>
-              <h3 class="text-2xl font-bold mb-4">Subtraction</h3>
-              <button
-                onclick="startMathGame('subtraction')"
-                class="bg-red-500 text-black px-6 py-2 rounded-full font-bold hover:bg-red-400"
-              >
-                Play Now
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <div id="math-game" class="hidden">
-          <div class="flex justify-between items-center mb-8">
-            <button
-              onclick="backToMathMenu()"
-              class="text-blue-400 hover:text-blue-300 font-bold text-lg"
-            >
-              ← Back
-            </button>
-            <div class="glass px-6 py-2 rounded-full">
-              <span class="text-yellow-400 font-bold"
-                >Score: <span id="score">0</span></span
-              >
-            </div>
-            <div id="streak" class="glass px-6 py-2 rounded-full hidden">
-              <span class="text-green-400 font-bold"
-                >🔥 <span id="streak-count">0</span></span
-              >
-            </div>
-          </div>
-
-          <div
-            class="bg-gradient-to-br from-blue-500/20 to-purple-500/20 p-12 rounded-3xl text-center mb-8"
-          >
-            <p class="text-slate-300 mb-4 text-lg">
-              Problem <span id="problem-number">1</span> of 10
-            </p>
-            <div class="text-6xl font-bold text-white mb-8" id="problem">
-              5 + 3
-            </div>
-
-            <div id="feedback" class="mb-6 text-2xl font-bold hidden"></div>
-
-            <div
-              class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8"
-              id="answers-container"
-            >
-              <!-- Answers will be generated here -->
-            </div>
-
-            <div id="game-complete" class="hidden text-center">
-              <div class="text-5xl mb-4">🎉</div>
-              <h3 class="text-3xl font-bold text-white mb-4">Great Job!</h3>
-              <p class="text-2xl text-yellow-400 mb-8">
-                Final Score: <span id="final-score">0</span>/10
-              </p>
-              <button
-                onclick="backToMathMenu()"
-                class="bg-blue-500 text-white px-8 py-3 rounded-full font-bold hover:bg-blue-400"
-              >
-                Play Again
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
+    <div class="container mx-auto px-4 pb-20" id="content-container">
+      <!-- Content will be loaded here -->
     </div>
 
     <script>
@@ -201,15 +60,25 @@
       let problemCount = 0;
       let answered = false;
       let answeredCorrectly = false;
+      let currentSection = "about";
+
+      async function loadSection(sectionId) {
+        const container = document.getElementById("content-container");
+        const fileName = sectionId === "about" ? "about.html" : "math.html";
+
+        try {
+          const response = await fetch(fileName);
+          const html = await response.text();
+          container.innerHTML = html;
+          currentSection = sectionId;
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        } catch (error) {
+          console.error("Error loading section:", error);
+        }
+      }
 
       function showSection(sectionId) {
-        document.querySelectorAll(".content-section").forEach((section) => {
-          section.classList.add("hidden");
-        });
-        document
-          .getElementById(sectionId + "-section")
-          .classList.remove("hidden");
-        window.scrollTo({ top: 0, behavior: "smooth" });
+        loadSection(sectionId);
       }
 
       function startMathGame(gameType) {
@@ -354,6 +223,11 @@
         currentProblem = null;
         answered = false;
       }
+
+      // Load the about section on page load
+      window.addEventListener("DOMContentLoaded", () => {
+        loadSection("about");
+      });
     </script>
   </body>
 </html>
