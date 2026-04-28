@@ -165,13 +165,17 @@
           const num2 = Math.floor(Math.random() * 10) + 1; // 1-10
           const answer = num1 + num2;
           currentProblem = { num1, num2, answer, type: "addition" };
-          document.getElementById("problem").textContent = `${num1} + ${num2}`;
+          document.getElementById("num1").textContent = num1;
+          document.getElementById("num2").textContent = num2;
+          document.getElementById("operator").textContent = "+";
         } else {
           const num1 = Math.floor(Math.random() * 11) + 5; // 5-15
           const num2 = Math.floor(Math.random() * num1); // 0 to num1
           const answer = num1 - num2;
           currentProblem = { num1, num2, answer, type: "subtraction" };
-          document.getElementById("problem").textContent = `${num1} - ${num2}`;
+          document.getElementById("num1").textContent = num1;
+          document.getElementById("num2").textContent = num2;
+          document.getElementById("operator").textContent = "-";
         }
       }
 

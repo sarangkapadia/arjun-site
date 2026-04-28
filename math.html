@@ -81,12 +81,39 @@
         Problem <span id="problem-number">1</span> of 10
       </p>
 
-      <!-- Problem Display -->
-      <div
-        class="text-8xl md:text-9xl font-black text-white mb-8 md:mb-12 drop-shadow-lg"
-        id="problem"
-      >
-        5 + 3
+      <!-- Problem Display - Vertical Format -->
+      <div class="mb-8 md:mb-12 flex justify-center">
+        <div
+          class="bg-white bg-opacity-10 rounded-3xl p-8 md:p-12 backdrop-blur-sm border-4 border-white border-opacity-20"
+        >
+          <!-- First Number -->
+          <div
+            class="text-6xl md:text-8xl font-black text-white mb-4 md:mb-6 text-right pr-4 md:pr-8"
+          >
+            <span id="num1">5</span>
+          </div>
+
+          <!-- Operator and Second Number -->
+          <div class="flex justify-end items-center mb-4 md:mb-6">
+            <span
+              class="text-6xl md:text-8xl font-black text-yellow-300 mr-4 md:mr-6"
+              ><span id="operator">+</span></span
+            >
+            <div class="text-6xl md:text-8xl font-black text-white">
+              <span id="num2">3</span>
+            </div>
+          </div>
+
+          <!-- Divider Line -->
+          <div class="border-4 border-white mb-4 md:mb-6"></div>
+
+          <!-- Answer Line -->
+          <div
+            class="text-6xl md:text-8xl font-black text-white text-right pr-4 md:pr-8"
+          >
+            <span id="answer-placeholder">?</span>
+          </div>
+        </div>
       </div>
 
       <!-- Feedback Message -->
