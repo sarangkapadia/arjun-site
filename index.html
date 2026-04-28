@@ -111,6 +111,9 @@
 
         document.getElementById("problem-number").textContent = problemCount;
         document.getElementById("feedback").classList.add("hidden");
+        document.getElementById("answer-input").value = "";
+        document.getElementById("answer-input").disabled = false;
+        document.getElementById("answer-input").focus();
 
         if (currentGame === "addition") {
           const num1 = Math.floor(Math.random() * 10) + 1; // 1-10
@@ -125,39 +128,13 @@
           currentProblem = { num1, num2, answer, type: "subtraction" };
           document.getElementById("problem").textContent = `${num1} - ${num2}`;
         }
-
-        generateAnswerButtons();
       }
 
-      function generateAnswerButtons() {
-        const container = document.getElementById("answers-container");
-        container.innerHTML = "";
-
-        const correctAnswer = currentProblem.answer;
-        const answers = new Set([correctAnswer]);
-
-        // Generate 3 more wrong answers
-        while (answers.size < 4) {
-          const wrongAnswer = Math.floor(Math.random() * 20);
-          if (wrongAnswer !== correctAnswer) {
-            answers.add(wrongAnswer);
-          }
-        }
-
-        // Shuffle answers
-        const answersArray = Array.from(answers).sort(
-          () => Math.random() - 0.5,
-        );
-
-        answersArray.forEach((ans) => {
-          const button = document.createElement("button");
-          button.textContent = ans;
-          button.onclick = () => checkAnswer(ans);
-          button.className =
-            "answer-btn glass p-6 rounded-2xl text-2xl font-bold text-white hover:bg-blue-500/20 transition disabled:opacity-50";
-          button.id = `answer-${ans}`;
-          container.appendChild(button);
-        });
+      function submitAnswer() {
+        const inputValue = document.getElementById("answer-input").value.trim();
+        if (!inputValue) return;
+        const selectedAnswer = parseInt(inputValue);
+        checkAnswer(selectedAnswer);
       }
 
       function checkAnswer(selectedAnswer) {
@@ -168,8 +145,7 @@
         answeredCorrectly = isCorrect;
 
         const feedback = document.getElementById("feedback");
-        const allAnswerButtons = document.querySelectorAll(".answer-btn");
-        allAnswerButtons.forEach((btn) => (btn.disabled = true));
+        document.getElementById("answer-input").disabled = true;
 
         if (isCorrect) {
           score++;
@@ -183,7 +159,7 @@
           feedback.innerHTML = "✅ Correct!";
           feedback.style.color = "#4ade80";
           feedback.classList.remove("hidden");
-          document.getElementById(`answer-${selectedAnswer}`).style.background =
+          document.getElementById("answer-input").style.background =
             "rgba(74, 222, 128, 0.3)";
         } else {
           streak = 0;
@@ -192,33 +168,114 @@
           feedback.innerHTML = `❌ Oops! The answer is ${currentProblem.answer}`;
           feedback.style.color = "#f87171";
           feedback.classList.remove("hidden");
-          document.getElementById(`answer-${selectedAnswer}`).style.background =
+          document.getElementById("answer-input").style.background =
             "rgba(248, 113, 113, 0.3)";
-          document.getElementById(
-            `answer-${currentProblem.answer}`,
-          ).style.background = "rgba(74, 222, 128, 0.3)";
         }
 
         setTimeout(() => {
+          document.getElementById("answer-input").style.background = "";
           generateNextProblem();
         }, 2000);
       }
 
+      const surpriseRewards = [
+        {
+          emoji: "🏆",
+          title: "Math Champion!",
+          message: "You're a true math master!",
+        },
+        {
+          emoji: "🚀",
+          title: "Math Rocket!",
+          message: "You're flying high with math!",
+        },
+        {
+          emoji: "👑",
+          title: "Math King!",
+          message: "You're royalty in the math world!",
+        },
+        {
+          emoji: "⭐",
+          title: "Super Star!",
+          message: "You shine like a brilliant star!",
+        },
+        {
+          emoji: "🦸",
+          title: "Math Hero!",
+          message: "You saved the day with perfect math!",
+        },
+        {
+          emoji: "💎",
+          title: "Diamond Mind!",
+          message: "Your brain is a precious gem!",
+        },
+        {
+          emoji: "🔥",
+          title: "On Fire!",
+          message: "You're burning up at math!",
+        },
+        {
+          emoji: "🎪",
+          title: "Math Genius!",
+          message: "Your brain is absolutely genius!",
+        },
+        {
+          emoji: "🌟",
+          title: "Shining Bright!",
+          message: "You're a mathematical supernova!",
+        },
+        {
+          emoji: "🎯",
+          title: "Bullseye!",
+          message: "Perfect aim, perfect score!",
+        },
+        {
+          emoji: "🏅",
+          title: "Gold Medalist!",
+          message: "You won the math Olympics!",
+        },
+        {
+          emoji: "🎨",
+          title: "Math Artist!",
+          message: "You paint with numbers beautifully!",
+        },
+      ];
+
+      function getRandomReward() {
+        return surpriseRewards[
+          Math.floor(Math.random() * surpriseRewards.length)
+        ];
+      }
+
       function showGameComplete() {
-        document.getElementById("answers-container").innerHTML = "";
-        document.getElementById(
-          "answers-container",
-        ).parentElement.style.display = "none";
+        document.getElementById("answer-input").parentElement.style.display =
+          "none";
         document.getElementById("game-complete").classList.remove("hidden");
         document.getElementById("final-score").textContent = score;
+
+        if (score === 10) {
+          const reward = getRandomReward();
+          document.getElementById("reward-emoji").textContent = "🎁";
+          document.getElementById("reward-display").textContent = reward.emoji;
+          document.getElementById("reward-message").textContent =
+            reward.message;
+
+          document.getElementById("perfect-reward").classList.remove("hidden");
+          document.getElementById("normal-complete").classList.add("hidden");
+        } else {
+          document.getElementById("perfect-reward").classList.add("hidden");
+          document.getElementById("normal-complete").classList.remove("hidden");
+        }
       }
 
       function backToMathMenu() {
         document.getElementById("math-game").classList.add("hidden");
         document.getElementById("math-menu").classList.remove("hidden");
-        document.getElementById(
-          "answers-container",
-        ).parentElement.style.display = "block";
+        document.getElementById("answer-input").parentElement.style.display =
+          "flex";
+        document.getElementById("answer-input").style.background = "";
+        document.getElementById("answer-input").value = "";
+        document.getElementById("game-complete").classList.add("hidden");
         currentGame = null;
         currentProblem = null;
         answered = false;
