@@ -144,6 +144,7 @@
         document.getElementById("math-menu").classList.add("hidden");
         document.getElementById("math-game").classList.remove("hidden");
         document.getElementById("game-complete").classList.add("hidden");
+        document.getElementById("game-active-area").classList.remove("hidden");
         document.getElementById("score").textContent = "0";
         document.getElementById("streak-count").textContent = "0";
         document.getElementById("streak").classList.add("hidden");
@@ -152,6 +153,8 @@
       }
 
       function generateNextProblem() {
+        if (currentSection !== "math") return; // Prevent errors if user navigated away
+
         answered = false;
         answeredCorrectly = false;
         problemCount++;
@@ -178,7 +181,7 @@
           document.getElementById("answer-placeholder").textContent = "?";
         } else {
           const num1 = Math.floor(Math.random() * 11) + 5; // 5-15
-          const num2 = Math.floor(Math.random() * num1); // 0 to num1
+          const num2 = Math.floor(Math.random() * (num1 + 1)); // 0 to num1 inclusive
           const answer = num1 - num2;
           currentProblem = { num1, num2, answer, type: "subtraction" };
           document.getElementById("num1").textContent = num1;
@@ -311,9 +314,7 @@
       }
 
       function showGameComplete() {
-        document.getElementById(
-          "answer-input",
-        ).parentElement.parentElement.style.display = "none";
+        document.getElementById("game-active-area").classList.add("hidden");
         document.getElementById("game-complete").classList.remove("hidden");
         document.getElementById("final-score").textContent = score;
 
@@ -335,9 +336,7 @@
       function backToMathMenu() {
         document.getElementById("math-game").classList.add("hidden");
         document.getElementById("math-menu").classList.remove("hidden");
-        document.getElementById(
-          "answer-input",
-        ).parentElement.parentElement.style.display = "flex";
+        document.getElementById("game-active-area").classList.remove("hidden");
         document.getElementById("answer-input").style.background = "";
         document.getElementById("answer-input").value = "";
         document.getElementById("game-complete").classList.add("hidden");
