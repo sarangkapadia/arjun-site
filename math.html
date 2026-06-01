@@ -4,7 +4,7 @@
     <h2 class="text-5xl md:text-6xl font-black mb-6 md:mb-12 text-white">
       🎮 Let's Play Math!
     </h2>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
       <!-- Addition Card -->
       <div
         class="glass p-8 md:p-12 rounded-3xl md:rounded-4xl border-t-4 border-yellow-400 transform hover:scale-105 transition-transform cursor-pointer"
@@ -38,6 +38,25 @@
         </p>
         <button
           class="bg-gradient-to-r from-red-400 to-red-500 text-black px-8 md:px-12 py-4 md:py-6 rounded-full font-black text-2xl md:text-3xl hover:shadow-lg hover:shadow-red-500 transition-all active:scale-95"
+        >
+          Let's Go! 🚀
+        </button>
+      </div>
+
+      <!-- Sorting Card -->
+      <div
+        class="glass p-8 md:p-12 rounded-3xl md:rounded-4xl border-t-4 border-green-400 transform hover:scale-105 transition-transform cursor-pointer"
+        onclick="startMathGame('sorting')"
+      >
+        <div class="text-8xl md:text-9xl mb-6">🔢</div>
+        <h3 class="text-4xl md:text-5xl font-black mb-6 text-green-300">
+          Sorting
+        </h3>
+        <p class="text-2xl md:text-3xl text-slate-200 mb-6">
+          Least to most!
+        </p>
+        <button
+          class="bg-gradient-to-r from-green-400 to-green-500 text-black px-8 md:px-12 py-4 md:py-6 rounded-full font-black text-2xl md:text-3xl hover:shadow-lg hover:shadow-green-500 transition-all active:scale-95"
         >
           Let's Go! 🚀
         </button>
@@ -83,8 +102,8 @@
           Problem <span id="problem-number">1</span> of 10
         </p>
 
-        <!-- Problem Display - Vertical Format -->
-        <div class="mb-4 flex flex-col items-center">
+        <!-- Standard Game Area (Addition/Subtraction) -->
+        <div id="standard-game-area" class="mb-4 flex flex-col items-center">
           <div
             class="bg-white bg-opacity-10 rounded-3xl p-8 md:p-12 backdrop-blur-sm border-4 border-white border-opacity-20"
           >
@@ -115,6 +134,41 @@
               <button
                 onclick="submitAnswer()"
                 class="bg-gradient-to-r from-green-400 to-green-500 text-black px-10 py-4 rounded-full font-black text-3xl hover:shadow-lg hover:shadow-green-500 transition-all active:scale-95"
+              >
+                ✓ Check!
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sorting Game Area -->
+        <div id="sorting-game-area" class="hidden mb-4 flex flex-col items-center w-full">
+          <h4 class="text-3xl md:text-4xl font-black text-white mb-6">
+            Tap the numbers in order from least to most! 🔢
+          </h4>
+          
+          <div class="bg-white bg-opacity-10 rounded-3xl p-8 md:p-12 backdrop-blur-sm border-4 border-white border-opacity-20 w-full max-w-4xl">
+            <!-- Unsorted Pool Label -->
+            <p class="text-xl md:text-2xl font-bold text-slate-200 mb-4">Numbers to Sort:</p>
+            <!-- Unsorted Pool -->
+            <div id="sorting-pool" class="flex flex-wrap gap-4 md:gap-6 justify-center min-h-[90px] mb-8 p-4 bg-black bg-opacity-20 rounded-2xl">
+              <!-- Dynamically populated tiles -->
+            </div>
+            
+            <!-- Slots Label -->
+            <p class="text-xl md:text-2xl font-bold text-slate-200 mb-4">Your Sorted Order:</p>
+            <!-- Target Slots -->
+            <div id="sorting-slots" class="flex flex-wrap gap-4 md:gap-6 justify-center min-h-[90px] mb-8 p-4 bg-black bg-opacity-30 rounded-2xl">
+              <!-- Dynamically populated slots -->
+            </div>
+            
+            <!-- Check Button -->
+            <div class="flex justify-center mt-6">
+              <button
+                id="sorting-check-btn"
+                onclick="submitSortingAnswer()"
+                class="bg-gradient-to-r from-green-400 to-green-500 text-black px-12 py-5 rounded-full font-black text-3xl hover:shadow-lg hover:shadow-green-500 transition-all active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
+                disabled
               >
                 ✓ Check!
               </button>
