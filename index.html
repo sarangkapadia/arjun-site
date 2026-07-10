@@ -177,21 +177,30 @@
           answerInput.value = "";
           answerInput.disabled = false;
           answerInput.style.background = "";
-          if (currentGame !== "sorting") {
+          if (currentGame !== "sorting" && currentGame !== "ladder") {
             answerInput.focus();
           }
         }
 
         const standardArea = document.getElementById("standard-game-area");
         const sortingArea = document.getElementById("sorting-game-area");
+        const ladderArea = document.getElementById("ladder-game-area");
 
         if (currentGame === "sorting") {
           if (standardArea) standardArea.classList.add("hidden");
+          if (ladderArea) ladderArea.classList.add("hidden");
           if (sortingArea) sortingArea.classList.remove("hidden");
           
           generateSortingProblem();
+        } else if (currentGame === "ladder") {
+          if (standardArea) standardArea.classList.add("hidden");
+          if (sortingArea) sortingArea.classList.add("hidden");
+          if (ladderArea) ladderArea.classList.remove("hidden");
+
+          generateLadderProblem();
         } else {
           if (sortingArea) sortingArea.classList.add("hidden");
+          if (ladderArea) ladderArea.classList.add("hidden");
           if (standardArea) standardArea.classList.remove("hidden");
 
           if (currentGame === "addition") {
@@ -419,6 +428,214 @@
         }, 2000);
       }
 
+      // Ladder Game Code
+      const funnyScenarios = [
+        { text: "The Wolf is wearing a pink tutu 👗 and the Pig is wearing cool sunglasses 🕶️!", wolf: "🐺", pig: "🐷" },
+        { text: "The Wolf wants a slice of giant pizza 🍕 and the Pig is juggling donuts 🍩!", wolf: "🐺", pig: "🐷" },
+        { text: "The Wolf is playing a tiny ukulele 🪕 while the Pig does yoga 🧘!", wolf: "🐺", pig: "🐷" },
+        { text: "The Wolf is wearing a silly birthday hat 🥳 and the Pig is eating ice cream 🍦!", wolf: "🐺", pig: "🐷" },
+        { text: "The Wolf is holding a blue balloon 🎈 and the Pig is dressed as a superhero 🦸!", wolf: "🐺", pig: "🐷" },
+        { text: "The Wolf is wearing a detective hat 🕵️ and the Pig is reading a comic book 📖!", wolf: "🐺", pig: "🐷" },
+        { text: "The Wolf is carrying a bunch of flowers 💐 and the Pig is wearing a chef hat 🧑‍🍳!", wolf: "🐺", pig: "🐷" },
+        { text: "The Wolf has a funny fake mustache 🥸 and the Pig is listening to music on headphones 🎧!", wolf: "🐺", pig: "🐷" }
+      ];
+
+      function generateLadderProblem() {
+        const A = Math.floor(Math.random() * 10) + 1; // 1-10
+        const x = Math.floor(Math.random() * 10) + 1; // 1-10
+        const B = A + x;
+
+        currentProblem = { num1: A, num2: B, answer: x, type: "ladder" };
+
+        document.getElementById("ladder-num1").textContent = A;
+        document.getElementById("ladder-num2").textContent = B;
+
+        const input = document.getElementById("ladder-answer-input");
+        const checkBtn = document.getElementById("ladder-check-btn");
+        if (input) {
+          input.value = "";
+          input.disabled = false;
+          input.style.background = "";
+          setTimeout(() => input.focus(), 50);
+        }
+        if (checkBtn) {
+          checkBtn.disabled = false;
+        }
+
+        const scenario = funnyScenarios[Math.floor(Math.random() * funnyScenarios.length)];
+        const banner = document.getElementById("ladder-scenario-banner");
+        if (banner) {
+          banner.textContent = scenario.text;
+        }
+
+        renderLadder(A, B, scenario);
+      }
+
+      function renderLadder(A, B, scenario) {
+        const container = document.getElementById("ladder-visualization-container");
+        if (!container) return;
+
+        const maxStep = B + 1;
+        const stepHeight = 360 / maxStep;
+        
+        let rungsHTML = "";
+        let stepsLabelsHTML = "";
+
+        for (let i = 0; i <= maxStep; i++) {
+          const y = 380 - (i * stepHeight);
+          rungsHTML += `<line x1="60" y1="${y}" x2="140" y2="${y}" stroke="#d97706" stroke-width="6" stroke-linecap="round" />`;
+          stepsLabelsHTML += `<text x="35" y="${y + 4}" fill="#cbd5e1" font-size="14" font-weight="black" text-anchor="middle">${i}</text>`;
+        }
+
+        const wolfY = 380 - (A * stepHeight);
+        const pigY = 380 - (B * stepHeight);
+
+        container.innerHTML = `
+          <svg width="240" height="400" viewBox="0 0 200 400" class="w-full h-full overflow-visible">
+            <defs>
+              <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+                <feDropShadow dx="2" dy="2" stdDeviation="2" flood-color="#000" flood-opacity="0.3"/>
+              </filter>
+            </defs>
+            
+            <line x1="60" y1="10" x2="60" y2="390" stroke="#78350f" stroke-width="10" stroke-linecap="round" filter="url(#shadow)" />
+            <line x1="140" y1="10" x2="140" y2="390" stroke="#78350f" stroke-width="10" stroke-linecap="round" filter="url(#shadow)" />
+            
+            <g>${rungsHTML}</g>
+            <g>${stepsLabelsHTML}</g>
+
+            <g transform="translate(0, ${pigY})">
+              <text id="ladder-pig" x="100" y="-12" font-size="34" text-anchor="middle" class="transition-transform duration-300 transform hover:scale-110 cursor-pointer select-none">${scenario.pig}</text>
+            </g>
+
+            <g id="ladder-wolf-group" transform="translate(0, ${wolfY})" style="transition: transform 0.3s ease-out;">
+              <text id="ladder-wolf" x="100" y="-12" font-size="34" text-anchor="middle" class="transition-transform duration-300 transform hover:scale-110 cursor-pointer select-none">${scenario.wolf}</text>
+            </g>
+          </svg>
+        `;
+      }
+
+      function submitLadderAnswer() {
+        const input = document.getElementById("ladder-answer-input");
+        if (!input) return;
+        const inputValue = input.value.trim();
+        if (!inputValue) return;
+        const selectedAnswer = parseInt(inputValue);
+        checkLadderAnswer(selectedAnswer);
+      }
+
+      function checkLadderAnswer(selectedAnswer) {
+        if (answered) return;
+        answered = true;
+
+        const correctAnswer = currentProblem.answer;
+        const isCorrect = selectedAnswer === correctAnswer;
+        answeredCorrectly = isCorrect;
+
+        const feedback = document.getElementById("feedback");
+        const input = document.getElementById("ladder-answer-input");
+        const checkBtn = document.getElementById("ladder-check-btn");
+        if (input) input.disabled = true;
+        if (checkBtn) checkBtn.disabled = true;
+
+        if (isCorrect) {
+          score++;
+          streak++;
+          document.getElementById("score").textContent = score;
+          if (streak > 0) {
+            document.getElementById("streak").classList.remove("hidden");
+            document.getElementById("streak-count").textContent = streak;
+          }
+
+          feedback.innerHTML = "✅ Correct! Look at him climb! 🚀🏃‍♂️";
+          feedback.style.color = "#4ade80";
+          feedback.classList.remove("hidden");
+          if (input) input.style.background = "rgba(74, 222, 128, 0.3)";
+
+          const A = currentProblem.num1;
+          const B = currentProblem.num2;
+          animateWolfClimb(A, B, () => {
+            feedback.innerHTML = "🎉 The Wolf reached the Pig! HOORAY! 🥳🍕";
+            const pigText = document.getElementById("ladder-pig");
+            const wolfText = document.getElementById("ladder-wolf");
+            if (pigText) pigText.classList.add("animate-bounce");
+            if (wolfText) wolfText.classList.add("animate-bounce");
+            
+            setTimeout(() => {
+              if (input) input.style.background = "";
+              generateNextProblem();
+            }, 1800);
+          });
+        } else {
+          streak = 0;
+          document.getElementById("streak-count").textContent = "0";
+
+          feedback.innerHTML = `❌ Oops! The answer is ${correctAnswer}`;
+          feedback.style.color = "#f87171";
+          feedback.classList.remove("hidden");
+          if (input) input.style.background = "rgba(248, 113, 113, 0.3)";
+
+          const wolfGroup = document.getElementById("ladder-wolf-group");
+          if (wolfGroup) {
+            // Apply wiggle using web animations API for reliability
+            wolfGroup.animate([
+              { transform: `translate(0px, ${380 - (currentProblem.num1 * (360 / (currentProblem.num2 + 1)))}px) rotate(0deg)` },
+              { transform: `translate(-10px, ${380 - (currentProblem.num1 * (360 / (currentProblem.num2 + 1)))}px) rotate(-5deg)` },
+              { transform: `translate(10px, ${380 - (currentProblem.num1 * (360 / (currentProblem.num2 + 1)))}px) rotate(5deg)` },
+              { transform: `translate(0px, ${380 - (currentProblem.num1 * (360 / (currentProblem.num2 + 1)))}px) rotate(0deg)` }
+            ], {
+              duration: 500,
+              iterations: 2
+            });
+          }
+
+          setTimeout(() => {
+            if (input) input.style.background = "";
+            generateNextProblem();
+          }, 2500);
+        }
+      }
+
+      function animateWolfClimb(fromStep, toStep, callback) {
+        let current = fromStep;
+        const totalDuration = 1800; // ms
+        const totalSteps = toStep - fromStep;
+        const stepDuration = totalDuration / totalSteps;
+        
+        const wolfGroup = document.getElementById("ladder-wolf-group");
+        const wolfText = document.getElementById("ladder-wolf");
+        
+        function takeStep() {
+          if (current >= toStep) {
+            if (callback) callback();
+            return;
+          }
+          current++;
+          
+          const stepHeight = 360 / (currentProblem.num2 + 1);
+          const y = 380 - (current * stepHeight);
+          
+          if (wolfGroup) {
+            wolfGroup.style.transform = `translateY(${y}px)`;
+          }
+          
+          if (wolfText) {
+            wolfText.animate([
+              { transform: "translateY(0px)" },
+              { transform: "translateY(-15px)" },
+              { transform: "translateY(0px)" }
+            ], {
+              duration: stepDuration,
+              easing: "ease-out"
+            });
+          }
+          
+          setTimeout(takeStep, stepDuration);
+        }
+        
+        takeStep();
+      }
+
       const surpriseRewards = [
         {
           emoji: "🏆",
@@ -516,6 +733,11 @@
         if (answerInput) {
           answerInput.style.background = "";
           answerInput.value = "";
+        }
+        const ladderInput = document.getElementById("ladder-answer-input");
+        if (ladderInput) {
+          ladderInput.style.background = "";
+          ladderInput.value = "";
         }
         document.getElementById("game-complete").classList.add("hidden");
         currentGame = null;
