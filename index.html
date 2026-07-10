@@ -442,6 +442,72 @@
         { text: "The Pig put a fake mirror at the top so the Wolf gets scared by his own silly face! 🪞", wolf: "🐺", pig: "🐷" }
       ];
 
+      function playFunnyCatchSound() {
+        try {
+          const AudioContext = window.AudioContext || window.webkitAudioContext;
+          if (!AudioContext) return;
+          const ctx = new AudioContext();
+          
+          // Slide whistle effect
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.type = "triangle";
+          osc.frequency.setValueAtTime(180, ctx.currentTime);
+          osc.frequency.exponentialRampToValueAtTime(750, ctx.currentTime + 0.35);
+          
+          // Cartoon boing/spring harmonic osc
+          const osc2 = ctx.createOscillator();
+          osc2.type = "sine";
+          osc2.frequency.setValueAtTime(360, ctx.currentTime);
+          osc2.frequency.exponentialRampToValueAtTime(1500, ctx.currentTime + 0.35);
+
+          gain.gain.setValueAtTime(0.12, ctx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.45);
+          
+          osc.connect(gain);
+          osc2.connect(gain);
+          gain.connect(ctx.destination);
+          
+          osc.start();
+          osc2.start();
+          osc.stop(ctx.currentTime + 0.45);
+          osc2.stop(ctx.currentTime + 0.45);
+
+          // Funny double pop at the end
+          setTimeout(() => {
+            const popCtx = new AudioContext();
+            const popOsc = popCtx.createOscillator();
+            const popGain = popCtx.createGain();
+            popOsc.type = "sine";
+            popOsc.frequency.setValueAtTime(800, popCtx.currentTime);
+            popOsc.frequency.exponentialRampToValueAtTime(100, popCtx.currentTime + 0.1);
+            popGain.gain.setValueAtTime(0.2, popCtx.currentTime);
+            popGain.gain.exponentialRampToValueAtTime(0.01, popCtx.currentTime + 0.1);
+            popOsc.connect(popGain);
+            popGain.connect(popCtx.destination);
+            popOsc.start();
+            popOsc.stop(popCtx.currentTime + 0.1);
+          }, 400);
+
+          setTimeout(() => {
+            const popCtx2 = new AudioContext();
+            const popOsc2 = popCtx2.createOscillator();
+            const popGain2 = popCtx2.createGain();
+            popOsc2.type = "sine";
+            popOsc2.frequency.setValueAtTime(950, popCtx2.currentTime);
+            popOsc2.frequency.exponentialRampToValueAtTime(120, popCtx2.currentTime + 0.1);
+            popGain2.gain.setValueAtTime(0.2, popCtx2.currentTime);
+            popGain2.gain.exponentialRampToValueAtTime(0.01, popCtx2.currentTime + 0.1);
+            popOsc2.connect(popGain2);
+            popGain2.connect(popCtx2.destination);
+            popOsc2.start();
+            popOsc2.stop(popCtx2.currentTime + 0.1);
+          }, 520);
+        } catch (e) {
+          console.error("Audio playback failed", e);
+        }
+      }
+
       function generateLadderProblem() {
         const A = Math.floor(Math.random() * 10) + 1; // 1-10
         const x = Math.floor(Math.random() * 10) + 1; // 1-10
@@ -558,6 +624,7 @@
           const B = currentProblem.num2;
           animateWolfClimb(A, B, () => {
             feedback.innerHTML = "🎉 The Wolf reached the Pig! HOORAY! 🥳🍕";
+            playFunnyCatchSound();
             const pigText = document.getElementById("ladder-pig");
             const wolfText = document.getElementById("ladder-wolf");
             if (pigText) pigText.classList.add("animate-bounce");
